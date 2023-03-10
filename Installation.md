@@ -12,7 +12,7 @@ Once you have imported the key, add the repository to your Ubuntu 20.04 system b
 
     $> echo "deb https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang.list
 
-<h2>Step 3: Install Erlang on Ubuntu 22.04|20.04|18.04</h2>
+<h2>Step 3: Install Erlang on Ubuntu 20.04</h2>
 The last step is the actual installation of Erlang. Update your system package list and install Erlang:
 
     sudo apt update
@@ -118,6 +118,12 @@ If you have an active UFW firewall, open both ports 5672 and 15672:
     $> sudo ufw allow 15672
 
 Access it by opening the URL http://[server IP|Hostname]:15672
+
+
+![login-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/rabbitmq-loginpage.png?raw=true)
+
+
+
 
 **IMAGE**
 
