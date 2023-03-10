@@ -131,3 +131,84 @@ To be able to login on the network, create an admin user like below:
 Login with this admin username and the password assigned.
 
 <h1>Step 3: Set RabbitMQ Cluster</h1>
+
+**Setup Requirements**
+<p>Installed Ubuntu 20.04 LTS servers</p>
+<p>At least two RabbitMQ servers</p>
+<p>A user with sudo privileges</p>
+<p>The servers should have internet access</p>
+
+
+This setup of RabbitMQ Cluster on Ubuntu 20.04 is based on three servers with the following IP addresses and hostnames.
+
+| Server       | Hostname    | IP Address     |
+| ------------ | ----------- | -------------- |
+| rabbitmq-1   | mq1.com     | 4.231.106.167  |
+| rabbitmq-2   | mq2.com     | 74.234.187.167 |
+| rabbitmq-3   | mq2.com     | 74.234.240.177 |
+
+
+<h2>Step 1: Setup Hostnames and DNS</h2>
+
+The first step in the installation of the RabbitMQ cluster on Ubuntu 20.04 is to configure correct hostnames and DNS, you can add the records to the **/etc/hosts** file.
+
+Add server, hostname and ip information on all servers :
+
+    sudo echo "4.231.106.167 mq1.com rabbitmq-1" >> /etc/hosts
+    sudo echo "74.234.187.167 mq2.com rabbitmq-2" >> /etc/hosts
+    sudo echo "74.234.240.177 mq3.com rabbitmq-3" >> /etc/hosts
+
+Do this steps in all your servers.
+
+Then update your systems:
+
+    sudo apt update
+    sudo apt -y upgrade
+
+<h2>Step 2: Install Erlang and RabbitMQ</h2>
+
+Repeat Step 1 and Step 2 for all of your RabbitMQ Servers
+
+<h2>Step 3: Copy RabbitMQ Server 1 Cookie RabbitMQ to Server 2 and Server 3</h2>
+
+For RabbitMQ cluster to work, all the nodes participating in the cluster should have the same Cookie. Copy Cookie on your first node to all other nodes in the cluster.
+
+On mq1 run:
+
+    $> sudo scp /var/lib/rabbitmq/.erlang.cookie rabbitmq-2:/var/lib/rabbitmq/.erlang.cookie
+    $> sudo scp /var/lib/rabbitmq/.erlang.cookie rabbitmq-3:/var/lib/rabbitmq/.erlang.cookie
+
+<h2> Step 4: Reset RabbitMQ on Node2 </h2>
+
+Reconfigure RabbitMQ on Node 2 and join it to the cluster.
+
+Restart RabbitMQ service
+
+    sudo systemctl restart rabbitmq-server
+
+Stop application
+
+    $ sudo rabbitmqctl stop_app
+    Stopping rabbit application on node rabbit@mq2 ...
+
+Reset rabbitmq
+
+    $ sudo rabbitmqctl reset
+    Resetting node rabbit@mq2 ...
+
+Join the node to cluster
+
+    $ sudo rabbitmqctl join_cluster rabbit@rabbitmq-1
+    Clustering node rabbit@mq2 with rabbit@rabbitmq-1
+
+Start the application process
+
+    $ sudo rabbitmqctl start_app
+    Starting node rabbit@mq2 ...  completed with 0 plugins.
+
+Check Cluster Status:
+
+    root@rabbitmq-1:~# rabbitmqctl cluster_status
+
+   
+
