@@ -1,24 +1,24 @@
-<H1>Step 1: Install Erlang/OTP</H1>
+<H1>Adım 1: Erlang/OTP Yükleme</H1>
 
-<h2>Step 1: Import Erlang GPG Key</h2>
-Run the following commands to import Erlang repository GPG key:
+<h2>Adım 1.1: Erlang GPG Anahtarını Çıkartma</h2>
+Erlang deposu GPG anahtarını indirmek için aşağıdaki komutları çalıştırın:
 
      $> sudo apt update
      $> sudo apt install curl software-properties-common apt-transport-https lsb-release
      $> curl -fsSL https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/erlang.gpg
 
-<h2>Step 2: Add Erlang Repository to Ubuntu 20.04</h2>
-Once you have imported the key, add the repository to your Ubuntu 20.04 system by running the following commands:
+<h2>Adım 1.2: Ubuntu 20.04 Üzerine Erlang Deposunu Ekleme</h2>
+Anahtarı indirdikten sonra aşağodaki komutu çalıştırarak Ubuntu 20.04 sisteminize depoyu ekleyin:
 
     $> echo "deb https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang.list
 
-<h2>Step 3: Install Erlang on Ubuntu 20.04</h2>
-The last step is the actual installation of Erlang. Update your system package list and install Erlang:
+<h2>Adım 1.3: Ubuntu 20.04 Üzerine Erlang Yükleme</h2>
+Son adım ise Erlang' ın yüklenmesidir. Aşağıdaki komutlar ile sistem paket listesini güncelleyin ve Erlang' ı yükleyin:
 
     sudo apt update
     sudo apt install erlang
 ---
-To start  Erlang shell, run the command:
+Erlang shell başlatmak için aşağıdaki komutu yazarak yüklemenizi doğrulayabilirsiniz:
 
     $ erl
 --
@@ -28,25 +28,25 @@ To start  Erlang shell, run the command:
     1> ^G
     --> q
 
-<H1>Step 2: Install RabbitMQ</H1>
+<H1>Adım 2: RabbitMQ Yükleme</H1>
 
-<h2>Step 1: Add RabbitMQ Repository to Ubuntu</h2>
+<h2>Adım 2.1: Ubuntu' ya RabbitMQ Deposunu Ekleme</h2>
 
-Let’s add RabbitMQ Repository to our Ubuntu system.
+Aşağıdaki komut ile Ubuntu sisteminize RabbitMQ deposunu ekleyin:
 
     $> curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.deb.sh | sudo bash
 
-<h2>Step 2: Install RabbitMQ Server Ubuntu 20.04</h2>
+<h2>Adım 2.2: Ubuntu 20.04 Üzerinde RabbitMQ Server Yükleme</h2>
 
-To install RabbitMQ Server Ubuntu 20.04, update apt list first:
+Ubuntu 20.04 üzerinde RabbitMQ Server yüklemek için öncelikle sistemin apt listesini güncelleyin:
 
     $> sudo apt update
 
-Then install rabbitmq-server package:
+Sonrasında rabbitmq-server paketini yükleyin:
     
     $> sudo apt install rabbitmq-server
 
-Hit the **y** key to start the installation
+Yüklemeyi devam ettirmek için **y** tuşuna basın:
 
     Reading package lists... Done
     Building dependency tree       
@@ -60,9 +60,10 @@ Hit the **y** key to start the installation
     After this operation, 15.3 MB of additional disk space will be used.
     Do you want to continue? [Y/n] y
 
-After installation, RabbitMQ service is started and enabled to start on boot. To check the status, run:
+Yükleme sonrasında aşağıdaki ilk komut ile RabbitMQ servisinin sistem başlangıcında çalışmasını aktif edin, sonrasında ise servisin durumunu görüntüleyin:
 
-    $ systemctl status rabbitmq-server.service
+    $> systemctl enable rabbitmq-server.service
+    $> systemctl status rabbitmq-server.service
     ● rabbitmq-server.service - RabbitMQ broker
         Loaded: loaded (/lib/systemd/system/rabbitmq-server.service; enabled; vendor preset: enabled)
         Active: active (running) since Thu 2022-05-12 23:57:22 EAT; 40s ago
@@ -88,15 +89,14 @@ After installation, RabbitMQ service is started and enabled to start on boot. To
     Mei 12 23:57:22 ubuntu22 rabbitmq-server[5631]:   Starting broker... completed with 0 plugins.
     Mei 12 23:57:22 ubuntu22 systemd[1]: Started RabbitMQ broker.
 
-You can confirm if the service is configured to start on boot using the command:
+Aşağıdaki komutu kullanarak servisin sistem başlangıcında çalışmak için konfigüre edildiğini doğrulayın:
 
     $> systemctl is-enabled rabbitmq-server.service 
     enabled
 
-<h2>Step 3: Enable the RabbitMQ Management Dashboard</h2>
+<h2>Adım 2.3: RabbitMQ Yönetim Ara Yüzünü Aktif Etme</h2>
 
-You can optionally enable the RabbitMQ Management Web dashboard for easy management.
-
+İsteğe bağlı olarak, kolay yönetim için RabbitMQ web ara yüzünü de aktif edebilirsiniz:
     $> sudo rabbitmq-plugins enable rabbitmq_management
     Enabling plugins on node rabbit@ubuntu:
     rabbitmq_management
@@ -112,12 +112,12 @@ You can optionally enable the RabbitMQ Management Web dashboard for easy managem
 
     started 3 plugins.
 
-If you have an active UFW firewall, open both ports 5672 and 15672:
+Eğerk aktif olarak UFW firewall ayarına sahipseniz 5672 ve 15672 portlarını aşağıdaki komutlar ile açın:
 
     $> sudo ufw allow 5672
     $> sudo ufw allow 15672
 
-Access it by opening the URL http://[server IP|Hostname]:15672
+http://[server IP|Hostname]:15672 URL' ini açarak ara yüze erişin:
 
 
 ![login-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/rabbitmq-loginpage.png?raw=true)
@@ -125,84 +125,81 @@ Access it by opening the URL http://[server IP|Hostname]:15672
 
 
 
-**IMAGE**
+Varsayılan olarak **guest** kullanıcısı mevcuttur ve sadece localhost üzerinden erişilebilir. Local olarak kullanıcı adı ve şifre **guest** yazarak giriş yapabilirsiniz.
 
-By default, the guest user exists and can connect only from localhost. You can login with this user locally with the password “guest”
-
-To be able to login on the network, create an admin user like below:
+Ağ üzerinde giriş yapabilmek için aşağıdaki komutlar ile **admin** kullanıcı oluşturabilirsiniz:
 
     $> sudo rabbitmqctl add_user admin StrongPassword
     $> sudo rabbitmqctl set_user_tags admin administrator
 
-Login with this admin username and the password assigned.
+**admin** kullanıcı adı ve atanan parola ile giriş yapabilirsiniz.
 
-<h1>Step 3: Set RabbitMQ Cluster</h1>
+<h1>Adım 3: RabbitMQ Cluster Kurulumu</h1>
 
-**Setup Requirements**
-<p>Installed Ubuntu 20.04 LTS servers</p>
-<p>At least two RabbitMQ servers</p>
-<p>A user with sudo privileges</p>
-<p>The servers should have internet access</p>
+**Kurulum Gereksinimleri**
+<p>-Ubuntu 20.04 server</p>
+<p>-En az 2 farklı server üzerinde çalışan RabbitMQ Servisi</p>
+<p>-sudo ayrıcalıklarına sahip bir kullanıcı</p>
+<p>-Serverların internet erişimi</p>
 
 
-This setup of RabbitMQ Cluster on Ubuntu 20.04 is based on three servers with the following IP addresses and hostnames.
+Bu örnekte RabbitMQ Cluster kurulumu için 3 adet Ubuntu 20.04 olarak çalışan server kullanılmıştır ve ağ bilgileri aşağıdaki tablodaki gibidir:
 
-| Server       | Hostname    | IP Address     |
+| Server       | Hostname    | IP Adresleri   |
 | ------------ | ----------- | -------------- |
 | rabbitmq-1   | mq1.com     | 4.231.106.167  |
 | rabbitmq-2   | mq2.com     | 74.234.187.167 |
 | rabbitmq-3   | mq2.com     | 74.234.240.177 |
 
 
-<h2>Step 1: Setup Hostnames and DNS</h2>
+<h2>Adım 3.1: Hostname and DNS Ayarları</h2>
 
-The first step in the installation of the RabbitMQ cluster on Ubuntu 20.04 is to configure correct hostnames and DNS, you can add the records to the **/etc/hosts** file.
+The first Adım in the installation of the RabbitMQ cluster on Ubuntu 20.04 is to configure correct hostnames and DNS, you can add the records to the **/etc/hosts** file.
+Rabbitmq Cluster kurulumu için gerekli olan ilk adım sunucular üzerinde DNS ve hostname ayarlarını doğru olarak konfigüre etmektir. Tablodaki bilgiler doğrultusunda kayıtları **/etc/hosts** dosyasına ekleyebilirsiniz.
 
-Add server, hostname and ip information on all servers :
+Server, hostname ve ip adresi bilgilerini aşağıdaki şekilde tüm sunucularda ekleyin:
 
     sudo echo "4.231.106.167 mq1.com rabbitmq-1" >> /etc/hosts
     sudo echo "74.234.187.167 mq2.com rabbitmq-2" >> /etc/hosts
     sudo echo "74.234.240.177 mq3.com rabbitmq-3" >> /etc/hosts
 
-Do this steps in all your servers.
-
-Then update your systems:
+Sonrasında sisteminizi güncelleyin:
 
     sudo apt update
     sudo apt -y upgrade
 
-<h2>Step 2: Install Erlang and RabbitMQ</h2>
+<h2>Adım 3.2: Sunuculara Erlang ve RabbitMQ Yükleme</h2>
 
-Repeat Step 1 and Step 2 for all of your RabbitMQ Servers
+Birinci ve ikinci adımlarda anlatılan Erlang ve RabbitMQ kurulumlarınızı tüm sunucularınızda uygulayın.
 
-<h2>Step 3: Copy RabbitMQ Server 1 Cookie RabbitMQ to Server 2 and Server 3</h2>
+<h2>Adım 3.3: RabbitMQ Server-1 Cookie Bilgisini Server-2 ve Server-3' e Kopyalama</h2>
 
-For RabbitMQ cluster to work, all the nodes participating in the cluster should have the same Cookie. Copy Cookie on your first node to all other nodes in the cluster.
+RabbitMQ cluster çalışması için cluster' a katılan tüm node'ların aynı Cookie' ye sahip olması gerekmektedir. Bu nedenle ilk serverdaki Cookie bilgisini diğer serverlara kopyalayın.
 
-On mq1 run:
+Bunun için rabbitmq-1 sunucunda aşağıdaki komutları çalıştırın:
 
     $> sudo scp /var/lib/rabbitmq/.erlang.cookie rabbitmq-2:/var/lib/rabbitmq/.erlang.cookie
     $> sudo scp /var/lib/rabbitmq/.erlang.cookie rabbitmq-3:/var/lib/rabbitmq/.erlang.cookie
 
-<h2> Step 4: Reset RabbitMQ on Node2 </h2>
+<h2> Adım 3.4: Node-2 Üzerinde RabbitMQ Servisini Yeniden Ayarlama</h2>
 
-Reconfigure RabbitMQ on Node 2 and join it to the cluster.
+Node-2 üzerindeki RabbitMQ servisini yeniden yapılandırın ve bu node'u cluster'a dahil edin.
 
-Restart RabbitMQ service
+RabbitMQ servisini yeniden başlatın:
 
     sudo systemctl restart rabbitmq-server
 
-Stop application
+Uygulamayı Durdurun:
 
     $ sudo rabbitmqctl stop_app
     Stopping rabbit application on node rabbit@mq2 ...
 
-Reset rabbitmq
+Rabbitmq uygulamasını yeniden başlatın:
 
     $ sudo rabbitmqctl reset
     Resetting node rabbit@mq2 ...
 
-Join the node to cluster
+Node' u cluster' a dahil edin:
 
     $ sudo rabbitmqctl join_cluster rabbit@rabbitmq-1
     Clustering node rabbit@mq2 with rabbit@rabbitmq-1
@@ -212,9 +209,32 @@ Start the application process
     $ sudo rabbitmqctl start_app
     Starting node rabbit@mq2 ...  completed with 0 plugins.
 
-Check Cluster Status:
+Cluster Statüsünü Kontrol Edin:
 
     root@rabbitmq-1:~# rabbitmqctl cluster_status
 
-   
+<h2>Adım 3.5: RabbitMQ HA İlkesi Yapılandırma</h2>
 
+Cluster'daki tüm node'lara yansıtılan kuyruklara izin veren bir ilke oluşturun:
+
+
+    $ sudo rabbitmqctl set_policy ha-all "." '{"ha-mode":"all"}'
+
+    Setting policy "ha-all" for pattern "." to "{"ha-mode":"all"}" with priority "0" for vhost "/" …
+
+Aşağıdaki komut ile yapılandılan ilkeleri listeleyebilirsiniz:
+
+    root@mq1:~# sudo rabbitmqctl list_policies
+    Listing policies for vhost "/" …
+    vhost    name    pattern apply-to    definition  priority
+    /    ha-all  .*  all {"ha-mode":"all"}   0
+Bir ilkeyi kullanmayı bırakmak için aşağıdaki komutu kullanabilirsini:
+
+
+    sudo rabbitmqctl clear_policy <policyname>
+
+<h2>Adım 3.6: RabbitMQ Cluster Kontrolü</h2>
+
+Aşağıdaki resimde de görüldüğü üzere gerekli yapılandırmalar sonrasında cluster'ımızın 3 node ile çalışıyor durumda olduğunu shell üzerinden kontrol ettiğimiz gibi ara yüz üzerinden de kontrol edebiliriz.
+
+![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/cluster.jpg?raw=true)
