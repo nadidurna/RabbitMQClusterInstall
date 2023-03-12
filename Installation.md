@@ -97,6 +97,7 @@ Aşağıdaki komutu kullanarak servisin sistem başlangıcında çalışmak içi
 <h2>Adım 2.3: RabbitMQ Yönetim Ara Yüzünü Aktif Etme</h2>
 
 İsteğe bağlı olarak, kolay yönetim için RabbitMQ web ara yüzünü de aktif edebilirsiniz:
+
     $> sudo rabbitmq-plugins enable rabbitmq_management
     Enabling plugins on node rabbit@ubuntu:
     rabbitmq_management
@@ -238,3 +239,7 @@ Bir ilkeyi kullanmayı bırakmak için aşağıdaki komutu kullanabilirsini:
 Aşağıdaki resimde de görüldüğü üzere gerekli yapılandırmalar sonrasında cluster'ımızın 3 node ile çalışıyor durumda olduğunu shell üzerinden kontrol ettiğimiz gibi ara yüz üzerinden de kontrol edebiliriz.
 
 ![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/cluster.jpg?raw=true)
+
+
+
+**RabbitMQ Cluster Kurulumu**
