@@ -1,9 +1,16 @@
 <H1>Adım 1: Erlang/OTP Yükleme</H1>
 
+![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/Erlang_logo.png?raw=true)
+
+
+Erlang/OTP (Açık Telekom Platformu), yüksek düzeyde ölçeklenebilir ve hataya dayanıklı uygulamalar geliştirmek için bir çerçeve sağlamak üzere Erlang programlama dili üzerine inşa edilmiş bir kitaplıklar, tasarım ilkeleri ve araçlar kümesidir. OTP, diğerleri arasında dağıtılmış bir veritabanı, bir web sunucusu ve bir mesajlaşma sistemi gibi, çoğunlukla Erlang'da yazılmış, kullanıma hazır bir dizi bileşen içerir.
+
+OTP özellikle gerçek zamanlı, dağıtılmış, hataya dayanıklı ve yüksek düzeyde kullanılabilir sistemler geliştirmek için çok uygundur. Geliştiricilerin hataları işleyebilen ve "çökmesine izin ver" felsefesi gibi hatalardan zarif bir şekilde kurtulabilen kodlar yazmasına yardımcı olan bir dizi tasarım ilkesi sağlar. Bu felsefe, geliştiricileri olası her hatayı önlemeye çalışmak yerine sistemlerini hataya dayanıklı olacak şekilde tasarlamaya teşvik eder.
+
+Genel olarak Erlang/OTP, yüksek kullanılabilirlik, ölçeklenebilirlik ve hataya dayanıklılık gerektiren karmaşık, dağıtılmış uygulamalar geliştirmek için güçlü bir platformdur. Telekomünikasyon endüstrisinde olduğu kadar finans, oyun ve sağlık gibi diğer sektörlerde de yaygın olarak kullanılmaktadır.
+
 
 <h2>Adım 1.1: Erlang GPG Anahtarını Çıkartma</h2>
-
-![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/Erlang_logo.png?raw=true)
 
 Erlang deposu GPG anahtarını indirmek için aşağıdaki komutları çalıştırın:
 
@@ -36,6 +43,12 @@ Erlang shell başlatmak için aşağıdaki komutu yazarak yüklemenizi doğrulay
 
 ![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/rabbitmq-logo.webp?raw=true)
 
+
+<p>
+RabbitMQ bir mesaj kuyruğu sistemidir. Benzerleri Apache Kafka, Msmq, Microsoft Azure Service Bus, Kestrel, ActiveMQ olarak sıralanabilir. Amacı herhangi bir kaynaktan alınan bir mesajın, bir başka kaynağa sırası geldiği anda iletilmesidir. Mantık olarak Redis Pub/Sub’a benzemektedir. Ama burada yapılacak işler bir sıraya alınmaktadır. Yani iletimin yapılacağı kaynak ayağa kalkana kadar, tüm işlemler bir quee’de sıralanabilir. Fakat aynı durum Redis Pub’Sub için geçerli değildir. RabbitMQ çoklu işletim sistemine destek vermesi ve açık kaynak kodlu olması da en büyük tercih sebeplerinden birisidir.
+
+Peki neden kullanılmalıdır: Bazı işlemlerin anlık yapılmasına ihtiyaç yoktur. Örnek vermek istenir ise sisteme yeni bir haber girildiğinde, ya da var olan bir haberin güncellenmesi anında cache’in düşürülmesi, bir başka örnek de upload edilen”Gif” dosyalarının scale işleminin yapılması gibi düşünülebilir. Hatta zaman ayarlı message ve otomatik mailler de yine RabbitMq’ya güzel bir örnek olabilir. Sıraya alınan bu işlemlerin asenkron bir şekilde yapılması, hem çalışan uygulamanın boş yere bekletilmemesinden hem de sunucu üzerindeki işlem maliyetinin minimuma indirilmesinden dolayı RabbitMQ iyi bir tercih sebebi olabilir. Ayrıca scalable olmasından dolayı da değişen trafikli yapılarda ayrıca tercih edilebilir.
+</p>
 
 <h2>Adım 2.1: Ubuntu' ya RabbitMQ Deposunu Ekleme</h2>
 
