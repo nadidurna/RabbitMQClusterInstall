@@ -1,6 +1,10 @@
 <H1>Adım 1: Erlang/OTP Yükleme</H1>
 
+
 <h2>Adım 1.1: Erlang GPG Anahtarını Çıkartma</h2>
+
+![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/Erlang_logo.png?raw=true)
+
 Erlang deposu GPG anahtarını indirmek için aşağıdaki komutları çalıştırın:
 
      $> sudo apt update
@@ -29,6 +33,9 @@ Erlang shell başlatmak için aşağıdaki komutu yazarak yüklemenizi doğrulay
     --> q
 
 <H1>Adım 2: RabbitMQ Yükleme</H1>
+
+![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/rabbitmq-logo.webp?raw=true)
+
 
 <h2>Adım 2.1: Ubuntu' ya RabbitMQ Deposunu Ekleme</h2>
 
