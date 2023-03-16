@@ -1,6 +1,6 @@
 <H1>Adım 1: Erlang/OTP Yükleme</H1>
 
-![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/Erlang_logo.png?raw=true)
+![main-page](https://github.com/nadidurna/RabbitMQClusterInstall/blob/master/images/Erlang_logo.webp?raw=true)
 
 
 Erlang/OTP (Açık Telekom Platformu), yüksek düzeyde ölçeklenebilir ve hataya dayanıklı uygulamalar geliştirmek için bir çerçeve sağlamak üzere Erlang programlama dili üzerine inşa edilmiş bir kitaplıklar, tasarım ilkeleri ve araçlar kümesidir. OTP, diğerleri arasında dağıtılmış bir veritabanı, bir web sunucusu ve bir mesajlaşma sistemi gibi, çoğunlukla Erlang'da yazılmış, kullanıma hazır bir dizi bileşen içerir.
